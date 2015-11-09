@@ -43,7 +43,7 @@ After executing the Elevator Control System, the control system has 4 different 
 	* difficult UI
 
 ## Example
-```
+`
 bash> ./elevator_control_system -f 1000
 Starting New Elevator ID:1, on Floor:1
 ECS> pickup 1 up
@@ -72,7 +72,7 @@ Stepping in time
 Elevator 1 dropped off on floor 1
 ECS> status
 Elevator Number 1 is on floor 1 and is STOPPED
-```
+`
 
 
 
