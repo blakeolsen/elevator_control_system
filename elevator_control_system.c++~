@@ -557,7 +557,7 @@ void loadup(struct elevator *elevator) {
     }   
     else {
       /* check if the new floor is the first goal floor */
-      if ((elevator->dir) == sign((pickedUp->floor) - (curr->floor))) {
+      if ((elevator->dir) == sign((curr->floor) - (pickedUp->floor))) {
 	pickedUp->next = curr;
 	elevator->goalFloors->first = pickedUp;
 	return;
@@ -571,8 +571,10 @@ void loadup(struct elevator *elevator) {
       }
       temp = curr->next;
       while (curr != NULL) {
+	printf("loop");
 	/* check if the new floor is the first goal floor */
 	if ((elevator->dir) == sign((pickedUp->floor) - (curr->floor))) {
+	  printf("here");
 	  pickedUp->next = temp;
 	  curr->next = pickedUp;
 	  return;
@@ -616,7 +618,7 @@ void timeStep(struct elevator **elevators, int num) {
 	/* we have reached a goal floor */
         if (curr->goalFloors->first->floor == curr->floor) {
           temp = curr->goalFloors->first;
-	  if(temp->loaded == LOAD) 
+	  if(temp->loaded == LOAD)
 	    loadup(curr);
 	  else if (temp->loaded == UNLOAD)
 	    printFloorReached(curr);
@@ -624,11 +626,11 @@ void timeStep(struct elevator **elevators, int num) {
 	    loadup(curr);
 	    printFloorReached(curr);
 	  }
-          if(curr->goalFloors->first == NULL)
+          if(curr->goalFloors->first == NULL) 
 	    curr->dir = STOPPED;
-	  else if((curr->dir) != sign(curr->goalFloors->first->floor - 
-				      curr->floor))
-	    curr->dir = ~curr->dir+1;
+	  else if((curr->dir) != sign(curr->floor - 
+				      curr->goalFloors->first->floor))
+	    curr->dir = ~curr->dir;
 	}
       }
     }
@@ -647,9 +649,9 @@ void timeStep(struct elevator **elevators, int num) {
 	}
 	if(curr->goalFloors->first == NULL)
 	  curr->dir = STOPPED;
-	else if((curr->dir) != sign(curr->goalFloors->first->floor - 
-				    curr->floor))
-	  curr->dir = ~curr->dir+1;
+	else if((curr->dir) != sign(curr->floor -
+				    curr->goalFloors->first->floor))
+	  curr->dir = ~curr->dir;
       }
     }
   }

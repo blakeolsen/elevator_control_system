@@ -15,7 +15,7 @@ A C++ application for simulating an Elevator Control System. The Elevator Contro
 * The user can request the state of any particular elevator or all of the elevator
 * floor numbers begin at floor 1 and count up to the number of floors specified
 * elevator numbers begin at 1 and count up to the number of elevators specified
-* all elevators begin on floor 1
+* all elevators begin on random floors
 
 ## Syntax
 
@@ -74,5 +74,6 @@ ECS> status
 Elevator Number 1 is on floor 1 and is STOPPED
 ```
 
-
-
+## Design Implementations
+* The future stops are listed in a priority queue including the least floor and the greatest floor
+* Floor assignments will be made to the elevator which requires the least steps to reach the new floor. (NOTE: this does not mean that floor assignments will be rearranged to maximize delivery speed, once a floor is assigned it is fixed)
